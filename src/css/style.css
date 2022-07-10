@@ -508,4 +508,8 @@ header {
     left: 50%;
     transform: translateX(-50%);
   }
+
+  .btn {
+    bottom: 2rem;
+  }
 }
