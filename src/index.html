@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/logo-favicon.svg"
+    />
+    <title>Rock, Paper, Scissors | Frontend Mentor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./js/script.js" defer></script>
+  </head>
+  <body>
+    <div class="overlay hidden">
+      <div class="rules-modal">
+        <div class="rules-modal-header">
+          <h2>Rules</h2>
+          <svg
+            aria-label="Close rules modal"
+            tabindex="1"
+            class="close-btn"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+          >
+            <path
+              fill="#3B4262"
+              fill-rule="evenodd"
+              d="M16.97 0l2.122 2.121-7.425 7.425 7.425 7.425-2.121 2.12-7.425-7.424-7.425 7.425L0 16.97l7.425-7.425L0 2.121 2.121 0l7.425 7.425L16.971 0z"
+            />
+          </svg>
+        </div>
+        <div>
+          <img src="./images/image-rules.svg" alt="Rules of the game" />
+        </div>
+      </div>
+    </div>
+    <header>
+      <div class="container">
+        <div class="game-header">
+          <img id="logo" src="./images/logo.svg" alt="Game logo" />
+          <div class="score-box">
+            <h1>Score</h1>
+            <strong class="points">0</strong>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="game">
+        <div class="container">
+          <div
+            data-option="paper"
+            class="option-border option-border--paper"
+            tabindex="1"
+          >
+            <div data-option="paper" class="option paper">
+              <img
+                data-option="paper"
+                src="./images/icon-paper.svg"
+                alt="Paper"
+              />
+            </div>
+          </div>
+          <div
+            data-option="scissors"
+            class="option-border option-border--scissors"
+            tabindex="2"
+          >
+            <div data-option="scissors" class="option scissors">
+              <img
+                data-option="scissors"
+                src="./images/icon-scissors.svg"
+                alt="Scissors"
+              />
+            </div>
+          </div>
+          <div
+            data-option="rock"
+            class="option-border option-border--rock"
+            tabindex="3"
+          >
+            <div data-option="rock" class="option rock">
+              <img data-option="rock" src="./images/icon-rock.svg" alt="Rock" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <button class="btn">Rules</button>
+    </footer>
+  </body>
+</html>

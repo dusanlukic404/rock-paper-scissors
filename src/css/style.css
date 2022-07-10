@@ -1,0 +1,511 @@
+/* Colors */
+:root {
+  --background-color: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+  --header-outline: hsl(217, 16%, 45%);
+  --score-text: hsl(229, 64%, 46%);
+  --dark-text: hsl(229, 25%, 31%);
+
+  --scissors: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+  --paper: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+  --rock: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+  --lizard: linear-gradient(hsl(261, 73%, 60%), hsl(261, 72%, 63%));
+  --cyan: linear-gradient(hsl(189, 59%, 53%), hsl(189, 58%, 57%));
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 62.5%;
+  min-height: 100vh;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Main styles for app */
+
+body {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  background-image: var(--background-color);
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+.container {
+  width: min(72rem, 80%);
+  margin-inline: auto;
+}
+
+main {
+  min-height: 100vh;
+}
+
+header {
+  margin-top: 5rem;
+}
+
+.game-header {
+  outline: 3px solid var(--header-outline);
+  border-radius: 1.3rem;
+  padding: 3rem;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.game-name {
+  color: hsl(60, 33%, 99%);
+  line-height: 0.88;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.score-box {
+  background-color: hsl(60, 33%, 99%);
+  border-radius: 1rem;
+  padding-inline: 3.5em;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-box h1 {
+  text-transform: uppercase;
+  color: var(--score-text);
+  letter-spacing: 0.9px;
+  font-size: 1.6rem;
+}
+
+.points {
+  line-height: 1;
+  color: var(--dark-text);
+  font-weight: 700;
+  font-size: 5rem;
+  font-size: clamp(2rem, 5vw + 1rem, 5rem);
+}
+
+.option {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  background-color: hsl(60, 33%, 99%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: inset 0 6px 0 hsl(227, 20%, 77%);
+}
+
+.game .container {
+  position: relative;
+  background-image: url("../images/bg-triangle.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  max-width: 32rem;
+  height: 30rem;
+  margin-top: 10rem;
+}
+
+.option-border {
+  position: absolute;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: all 300ms ease-in;
+}
+
+.option-border:hover,
+.option-border:focus-visible {
+  transform: scale(1.1);
+  outline: none;
+}
+
+.option-border--paper {
+  background-image: var(--paper);
+  box-shadow: inset 0 -6px 0 hsl(229, 65%, 46%);
+  top: -20%;
+  left: -20%;
+}
+
+.option-border--scissors {
+  background-image: var(--scissors);
+  box-shadow: inset 0 -6px 0 hsl(28, 76%, 44%);
+  top: -20%;
+  right: -20%;
+}
+
+.option-border--rock {
+  background-image: var(--rock);
+  box-shadow: inset 0 -6px 0 hsl(347, 76%, 35%);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.option-border--rock:hover,
+.option-border--rock:focus-visible {
+  transform: translateX(-50%) scale(1.1);
+  outline: none;
+}
+
+.btn {
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid var(--header-outline);
+  border-radius: 8px;
+  color: hsl(60, 33%, 99%);
+  padding: 0.5em 2em;
+
+  transition: all 300ms ease-in;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background-color: var(--header-outline);
+  outline: none;
+}
+
+/* Rules modal */
+
+.overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background-image: linear-gradient(
+    rgba(28, 35, 74, 0.51),
+    rgba(13, 16, 33, 0.842)
+  );
+  inset: 0;
+}
+
+.rules-modal {
+  background-color: hsl(60, 33%, 99%);
+  padding: 2.6rem 3rem;
+  border-radius: 9px;
+}
+
+.rules-modal h2 {
+  text-transform: uppercase;
+  font-size: 2.75rem;
+  color: rgba(13, 16, 33, 0.842);
+}
+
+.rules-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+.close-btn {
+  opacity: 0.25;
+  cursor: pointer;
+  transition: all 300ms ease-in;
+}
+
+.close-btn:hover,
+.close-btn:focus-visible {
+  opacity: 1;
+  outline-offset: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Picking part */
+
+.playing {
+  margin-top: 7rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.pickers h2 {
+  text-transform: uppercase;
+  color: hsl(60, 33%, 99%);
+  font-size: 1.85rem;
+}
+
+.option-border--playing {
+  position: relative;
+  transform: scale(1.3);
+  margin-top: 7rem;
+  left: 0;
+}
+
+.option-border--playing:hover {
+  transform: scale(1.3);
+}
+
+.house-picker {
+  position: relative;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 50%;
+  background-color: hsl(224, 47%, 17%);
+  margin-top: 7rem;
+}
+
+.option-border--winner::before,
+.option-border--winner::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: hsl(220, 33%, 65%);
+  opacity: 0.15;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.option-border--winner::before {
+  animation: pulse 2s ease-in infinite;
+}
+
+.option-border--winner::after {
+  animation: pulse 2s 1.5s ease-in infinite;
+}
+
+@keyframes pulse {
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+
+.result {
+  position: relative;
+  z-index: 99;
+}
+
+.result p {
+  margin-top: 7rem;
+  text-transform: uppercase;
+  font-size: clamp(2rem, 6vw + 1rem, 4rem);
+  color: hsl(60, 33%, 99%);
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.play-again-btn {
+  font-size: clamp(1.3rem, 2vw + 0.5rem, 1.6rem);
+  border-radius: 8px;
+  background-color: hsl(60, 33%, 99%);
+  color: var(--dark-text);
+  padding: 0.5em;
+  width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
+  box-shadow: 0 5px 5px hsl(221, 36%, 14%);
+
+  transition: color 300ms ease-in;
+}
+
+.play-again-btn:hover {
+  color: hsl(349, 71%, 52%);
+}
+
+/* Tablet size */
+
+@media (max-width: 768px) {
+  #logo {
+    width: clamp(3rem, 20vw + 3rem, 40rem);
+  }
+
+  .game-header {
+    padding: 2.5rem;
+  }
+
+  .game .container {
+    margin-top: 17rem;
+  }
+
+  .option-border {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .option {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .btn {
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile size  */
+
+@media (max-width: 720px) {
+  .game-header {
+    padding: 2rem;
+  }
+
+  .playing {
+    position: relative;
+    width: 100%;
+    margin-inline: auto;
+
+    justify-content: space-around;
+  }
+
+  .result {
+    position: absolute;
+    bottom: -17rem;
+  }
+
+  .overlay {
+    background-image: none;
+    background-color: hsl(60, 33%, 99%);
+  }
+
+  .rules-modal-header h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    bottom: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 520px) {
+  .option-border {
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .option {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .pickers h2 {
+    font-size: 1.55rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .option-border {
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .game .container {
+    width: 80%;
+  }
+
+  .option {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .option img {
+    width: 3rem;
+  }
+
+  .pickers h2 {
+    font-size: 1.45rem;
+  }
+
+  .option-border--paper {
+    top: -10%;
+    left: -7%;
+  }
+
+  .option-border--scissors {
+    top: -10%;
+    right: -7%;
+  }
+
+  .option-border--rock {
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
