@@ -6,7 +6,6 @@ This is a solution to the [Rock, Paper, Scissors challenge on Frontend Mentor](h
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
   - [Links](#links)
   - [Built with](#built-with)
 - [Author](#author)
